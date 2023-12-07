@@ -59,6 +59,7 @@ jobs:
             if [[ "$JSON" != *"$JSONline"* ]]; then
               JSON="$JSON$JSONline"
             fi
+            echo    JSONline: $JSONline
           fi
         done
 
