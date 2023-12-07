@@ -27,10 +27,11 @@ jobs:
       id: detect-platform
       run: |
         CHANGED_FILES=$(git diff ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} --name-only)
-        echo Changed files: $CHANGED_FILES
         # Construct the package and os into a json string to be consumed by Github Actions runners
+        checo Change Files: $CHANGED_FILES
         JSON="{\"include\":["
         for FILE in $CHANGED_FILES; do
+          echo File: $FILE
           if [[ $FILE == package_build_list_host_* ]]; then
             PLATFORM=$(echo $FILE | sed -n 's/package_build_list_host_\(.*\).json/\1/p')
             case $PLATFORM in
