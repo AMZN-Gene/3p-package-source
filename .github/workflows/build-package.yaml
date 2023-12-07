@@ -27,6 +27,7 @@ jobs:
       id: detect-platform
       run: |
         CHANGED_FILES=$(git diff ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} --name-only)
+        echo Changed files: $CHANGED_FILES
         # Construct the package and os into a json string to be consumed by Github Actions runners
         JSON="{\"include\":["
         for FILE in $CHANGED_FILES; do
