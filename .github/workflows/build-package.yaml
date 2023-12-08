@@ -55,7 +55,7 @@ jobs:
                       --exit-code -a --no-prefix -- $FILE | egrep "^\+" | grep Scripts 
             
             
-	    echo "   Diff survived"
+            echo "   Diff survived"
 	    
             $DIFF = "Test 123"
             echo "   Diff with Grep: $DIFF"
