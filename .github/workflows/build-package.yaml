@@ -51,14 +51,8 @@ jobs:
             echo "   About to diff"
 
             # Only get the changes that can be built
-            PUREDIFF=$(git diff ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} --no-ext-diff --unified=0 \
-                      --exit-code -a --no-prefix -- $FILE)
-            DIFFEXITCODE=$?
-
-            echo "   Diff survived"
-            echo "   Diff exit code: $DIFFEXITCODE"
-
-            if [ $DIFFEXITCODE != 0 ]; then
+            if [[ 0 == (git diff ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} --no-ext-diff --unified=0 \
+                      --exit-code -a --no-prefix -- $FILE | egrep "^\+" | grep Scripts) ]]; then
               echo "   No changes to build"
               continue
             fi
