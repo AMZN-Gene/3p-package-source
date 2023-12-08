@@ -51,10 +51,9 @@ jobs:
             echo "   About to diff"
 
             DIFF=$(git diff ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} --no-ext-diff --unified=0 \
-                        -a --no-prefix -- $FILE | egrep "^\+" | grep Scripts) # Get oly the changes that can be built
+                      --exit-code -a --no-prefix -- $FILE | egrep "^\+" | grep Scripts) # Get oly the changes that can be built
             if [ -z \"$DIFF\"]; then
               echo "   Diff with Grep: $DIFF"
-
             else
               echo "   Diff is EMPTY!"
               continue
