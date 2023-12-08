@@ -58,7 +58,14 @@ jobs:
             echo "   Diff without grep $DIFF"
 
 
-            DIFF=$(echo "$DIFF" | grep Scripts)
+            #DIFF=$(echo "$DIFF" | grep Scripts)
+            if echo "$DIFF" | grep Scripts; then
+              echo "   Found Scripts"
+              DIFF=$(echo "$DIFF" | grep Scripts)
+            else
+              echo "   Did not find Scripts. Skipping."
+              continue
+            fi
 
             echo "   Diff with Grep: $DIFF"
 
