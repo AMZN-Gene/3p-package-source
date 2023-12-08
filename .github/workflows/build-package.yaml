@@ -54,7 +54,15 @@ jobs:
             git diff ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} --no-ext-diff --unified=0 \
                       --exit-code -a --no-prefix -- $FILE | egrep "^\+" | grep Scripts
             
+            if [ $? -ne 0 ]; then
+              echo "   No changes to build"
+              continue
+            fi
             
+            $DIFF=$(git diff ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} --no-ext-diff --unified=0 \
+                      --exit-code -a --no-prefix -- $FILE | egrep "^\+" | grep Scripts)
+
+
             echo "   Diff survived"
 
             echo "   Diff with Grep: $DIFF"
